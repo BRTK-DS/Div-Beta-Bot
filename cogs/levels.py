@@ -8,6 +8,8 @@ from emoji import *
 
 # hahahahahahaahaah
 
+# lol
+
 intents = nextcord.Intents.default()
 intents.typing = False
 intents.presences = False
