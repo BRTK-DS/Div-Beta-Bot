@@ -178,7 +178,7 @@ class levels(commands.Cog):
         await interaction.response.send_message(embed=embed)
         
     @nextcord.slash_command()
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def przydziel_xp(self, interaction: Interaction, user: nextcord.User, xp_amount: int):
  
         user_id = str(user.id)
@@ -195,7 +195,7 @@ class levels(commands.Cog):
             await interaction.response.send_message(f"{failed_emoji}Nie masz odpowiednich uprawnień do tej komendy!")
             
     @nextcord.slash_command()
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def ustaw_poziom(self, interaction: Interaction, user: nextcord.User, new_level: int):
         
         user_id = str(user.id)

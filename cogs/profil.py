@@ -140,12 +140,12 @@ class profil(commands.Cog):
         embed.add_field(name="ODZNAKI: ", value=badge_field_value, inline=False)
 
         embed.set_thumbnail(url=user.display_avatar.url)
-        embed.set_image(url=user.display_avatar.url)
+        embed.set_image(url='https://cdn.discordapp.com/attachments/1155238879041962047/1174438129436995654/ApplicationFrameHost_d3ITrLFF9R.png?ex=656797be&is=655522be&hm=2d86ceafac0eb141358bc1ef008cfb9fe934a8376f87fb09fa630b4a950f9920&')
 
         await interaction.response.send_message(embed=embed)
 
     @nextcord.slash_command(name="odznaka", description="Przypisz odznakę użytkownikowi")
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def odznaka(self, interaction: Interaction, user: nextcord.User, badge_name: str):
 
         with open(self.user_profiles_file, 'r') as file:
@@ -211,7 +211,7 @@ class profil(commands.Cog):
         await interaction.response.send_message(f"{success_emoji}Pomyślnie zaktualizowano profil.")
         
     @nextcord.slash_command(name="dodaj_odznake", description="Dodaj emoji jako odznakę")
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def dodaj_odznake(self, interaction: Interaction, emoji: str, badge_name: str):
 
         if not emoji:

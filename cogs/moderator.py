@@ -10,7 +10,7 @@ class moderator(commands.Cog):
         self.client = client
         
     @nextcord.slash_command()
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def kick(self, interaction: Interaction, member: nextcord.Member, *, reason=None):
         await member.kick(reason=reason)
         await interaction.response.send_message(f'{success_emoji}Użytkownik {member.mention} został wyrzucony.')
@@ -21,7 +21,7 @@ class moderator(commands.Cog):
             await interaction.response.send_message(f"{failed_emoji}Nie masz odpowiednich uprawnień do tej komendy!")
 
     @nextcord.slash_command()
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def ban(self, interaction: Interaction, member: nextcord.Member, *, reason=None):
         try:
             appeal_message = f'Zostałeś zbanowany na serwerze za "{reason}". Jeśli chcesz odwołać się od bana, możesz to zrobić poprzez formularz: https://forms.gle/VbYGVJCmgMYsVg9U7'
