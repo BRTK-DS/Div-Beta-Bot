@@ -7,6 +7,7 @@ from datetime import datetime
 import json
 import os
 from nextcord.ext.application_checks import has_role, ApplicationMissingRole
+from cogs.levels import levels
 
 class profil(commands.Cog):
     user_profiles_file = 'user_profiles.json'
@@ -16,6 +17,7 @@ class profil(commands.Cog):
         self.client = client
         self.initialize_profiles()
         self.initialize_badges()
+        self.levels_cog = levels(client)
 
     def initialize_profiles(self):
         if not os.path.exists(profil.user_profiles_file):
@@ -39,6 +41,7 @@ class profil(commands.Cog):
             user_profiles = json.load(file)
 
         user_id = str(user.id)
+        level_info = self.levels_cog.get_user_level_info(user.id)
 
         if user_id in user_profiles:
             profile_data = user_profiles[user_id]
@@ -88,9 +91,11 @@ class profil(commands.Cog):
                 value=f"{monety_emoji}Portfel: Work In Progress",
                 inline=False
                 )
-
+        
+        level = level_info['level']
+        
         embed.add_field(name="POZIOM: ",
-                value=f"{poziom_emoji}Poziom: xx\n"
+                value=f"{poziom_emoji}Poziom: {level}\n" 
                       f"{pzmrep}Rep Level: Work In Progress\n",
                 inline=False
                 ) 

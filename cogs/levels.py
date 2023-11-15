@@ -28,6 +28,13 @@ class levels(commands.Cog):
         self.cooldown_users = set()
         self.xp_task.start()  # Zacznij task dla XP
 
+    def get_user_level_info(self, user_id):
+        user_id = str(user_id)
+        if user_id in user_data:
+            return user_data[user_id]
+        else:
+            return {'level': 1, 'xp': 0} # Lepsza integracja dla Profilu
+
     def cog_unload(self):
         self.xp_task.cancel()  # Anuluj przyznawanie XP gdy Cog się unload'uje
 
