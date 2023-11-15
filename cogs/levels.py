@@ -6,6 +6,8 @@ import random
 from nextcord.ext.application_checks import has_role, ApplicationMissingRole
 from emoji import *
 
+# hahahahahahaahaah
+
 intents = nextcord.Intents.default()
 intents.typing = False
 intents.presences = False
