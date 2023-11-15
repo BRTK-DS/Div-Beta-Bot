@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 import os
 
-from bottkn import *
+from chybacbposralo import *
 
 intents = nextcord.Intents.all()
 intents.members = True
