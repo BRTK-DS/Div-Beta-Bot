@@ -74,22 +74,22 @@ class levels(commands.Cog):
 
             # Przydzielanie rang za poziom
             if level >= 5:
-                role_id = 1170487875016609923
+                role_id = 1153058242474283178
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
                 
             if level >= 15:
-                role_id = 1170487922512896041
+                role_id = 1153059143133966446
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
                 
             if level >= 30:
-                role_id = 1170487960655888444
+                role_id = 1153059645770965053
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
                 
             if level >= 50:
-                role_id = 1170487988254429234
+                role_id = 1153059990496616599
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
 
