@@ -8,6 +8,7 @@ from emoji import *
 from serwerID import *
 
 intents = nextcord.Intents.default()
+intents.messages = True
 intents.typing = False
 intents.presences = False
 
@@ -53,12 +54,9 @@ class levels(commands.Cog):
     async def on_message(self, message):
         # Ignoruj wiadomości bota
         
-        guild_id = [ServerID]
+        guild_id = 1038037955836661840
         
-        if message.author.bot:
-            return
-        
-        if not message.guild:
+        if message.author.bot or not message.guild:
             return
         
         if message.guild.id != guild_id:
@@ -160,13 +158,16 @@ class levels(commands.Cog):
         embed = Embed(title=f"{lb_emoji} Leaderboard:", color=0xffe45c)
     
         for index, (user_id, data) in enumerate(sorted_users[:10], start=1):
-            user = self.client.get_user(int(user_id))
-            embed.add_field(
-                name=f"{index}. {user.display_name}",
-                value=f"{level_emoji}Level: {data['level']}\n"
-                f"{xp_emoji}XP: {data['xp']}",
-                inline=False
-                )
+            try:
+                user = await self.client.fetch_user(int(user_id))
+                embed.add_field(
+                    name=f"{index}. {user.display_name}",
+                    value=f"{level_emoji}Level: {data['level']}\n"
+                    f"{xp_emoji}XP: {data['xp']}",
+                    inline=False
+                    )
+            except nextcord.errors.NotFound:
+                await interaction.response.send_message(f"{failed_emoji} Użytkownik nie znajduje się w bazie danych!")
 
         embed.add_field(
                 name="========================================",
