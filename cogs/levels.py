@@ -5,6 +5,7 @@ import json
 import random
 from nextcord.ext.application_checks import has_role, ApplicationMissingRole
 from emoji import *
+from serwerID import *
 
 intents = nextcord.Intents.default()
 intents.typing = False
@@ -51,8 +52,17 @@ class levels(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         # Ignoruj wiadomości bota
+        
+        guild_id = [ServerID]
+        
         if message.author.bot:
             return
+        
+        if not message.guild:
+            return
+        
+        if message.guild.id != guild_id:
+            return   
 
         user_id = str(message.author.id)
 
