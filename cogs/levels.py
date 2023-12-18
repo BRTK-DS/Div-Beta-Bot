@@ -5,8 +5,10 @@ import json
 import random
 from nextcord.ext.application_checks import has_role, ApplicationMissingRole
 from emoji import *
+from serwerID import *
 
 intents = nextcord.Intents.default()
+intents.messages = True
 intents.typing = False
 intents.presences = False
 
@@ -28,6 +30,13 @@ class levels(commands.Cog):
         self.cooldown_users = set()
         self.xp_task.start()  # Zacznij task dla XP
 
+    def get_user_level_info(self, user_id):
+        user_id = str(user_id)
+        if user_id in user_data:
+            return user_data[user_id]
+        else:
+            return {'level': 1, 'xp': 0} # Lepsza integracja dla Profilu
+
     def cog_unload(self):
         self.xp_task.cancel()  # Anuluj przyznawanie XP gdy Cog się unload'uje
 
@@ -44,8 +53,14 @@ class levels(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         # Ignoruj wiadomości bota
-        if message.author.bot:
+        
+        guild_id = 1038037955836661840
+        
+        if message.author.bot or not message.guild:
             return
+        
+        if message.guild.id != guild_id:
+            return   
 
         user_id = str(message.author.id)
 
@@ -67,22 +82,22 @@ class levels(commands.Cog):
 
             # Przydzielanie rang za poziom
             if level >= 5:
-                role_id = 1170487875016609923
+                role_id = 1153058242474283178
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
                 
             if level >= 15:
-                role_id = 1170487922512896041
+                role_id = 1153059143133966446
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
                 
             if level >= 30:
-                role_id = 1170487960655888444
+                role_id = 1153059645770965053
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
                 
             if level >= 50:
-                role_id = 1170487988254429234
+                role_id = 1153059990496616599
                 role = message.guild.get_role(role_id)
                 await message.author.add_roles(role)
 
@@ -143,13 +158,16 @@ class levels(commands.Cog):
         embed = Embed(title=f"{lb_emoji} Leaderboard:", color=0xffe45c)
     
         for index, (user_id, data) in enumerate(sorted_users[:10], start=1):
-            user = self.client.get_user(int(user_id))
-            embed.add_field(
-                name=f"{index}. {user.display_name}",
-                value=f"{level_emoji}Level: {data['level']}\n"
-                f"{xp_emoji}XP: {data['xp']}",
-                inline=False
-                )
+            try:
+                user = await self.client.fetch_user(int(user_id))
+                embed.add_field(
+                    name=f"{index}. {user.display_name}",
+                    value=f"{level_emoji}Level: {data['level']}\n"
+                    f"{xp_emoji}XP: {data['xp']}",
+                    inline=False
+                    )
+            except nextcord.errors.NotFound:
+                await interaction.response.send_message(f"{failed_emoji} Użytkownik nie znajduje się w bazie danych!")
 
         embed.add_field(
                 name="========================================",
@@ -171,7 +189,7 @@ class levels(commands.Cog):
         await interaction.response.send_message(embed=embed)
         
     @nextcord.slash_command()
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def przydziel_xp(self, interaction: Interaction, user: nextcord.User, xp_amount: int):
  
         user_id = str(user.id)
@@ -188,7 +206,7 @@ class levels(commands.Cog):
             await interaction.response.send_message(f"{failed_emoji}Nie masz odpowiednich uprawnień do tej komendy!")
             
     @nextcord.slash_command()
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def ustaw_poziom(self, interaction: Interaction, user: nextcord.User, new_level: int):
         
         user_id = str(user.id)

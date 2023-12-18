@@ -7,6 +7,7 @@ from datetime import datetime
 import json
 import os
 from nextcord.ext.application_checks import has_role, ApplicationMissingRole
+from cogs.levels import levels
 
 class profil(commands.Cog):
     user_profiles_file = 'user_profiles.json'
@@ -16,6 +17,7 @@ class profil(commands.Cog):
         self.client = client
         self.initialize_profiles()
         self.initialize_badges()
+        self.levels_cog = levels(client)
 
     def initialize_profiles(self):
         if not os.path.exists(profil.user_profiles_file):
@@ -39,6 +41,7 @@ class profil(commands.Cog):
             user_profiles = json.load(file)
 
         user_id = str(user.id)
+        level_info = self.levels_cog.get_user_level_info(user.id)
 
         if user_id in user_profiles:
             profile_data = user_profiles[user_id]
@@ -88,9 +91,11 @@ class profil(commands.Cog):
                 value=f"{monety_emoji}Portfel: Work In Progress",
                 inline=False
                 )
-
+        
+        level = level_info['level']
+        
         embed.add_field(name="POZIOM: ",
-                value=f"{poziom_emoji}Poziom: xx\n"
+                value=f"{poziom_emoji}Poziom: {level}\n" 
                       f"{pzmrep}Rep Level: Work In Progress\n",
                 inline=False
                 ) 
@@ -135,12 +140,12 @@ class profil(commands.Cog):
         embed.add_field(name="ODZNAKI: ", value=badge_field_value, inline=False)
 
         embed.set_thumbnail(url=user.display_avatar.url)
-        embed.set_image(url=user.display_avatar.url)
+        embed.set_image(url='https://cdn.discordapp.com/attachments/1155238879041962047/1174438129436995654/ApplicationFrameHost_d3ITrLFF9R.png?ex=656797be&is=655522be&hm=2d86ceafac0eb141358bc1ef008cfb9fe934a8376f87fb09fa630b4a950f9920&')
 
         await interaction.response.send_message(embed=embed)
 
     @nextcord.slash_command(name="odznaka", description="Przypisz odznakę użytkownikowi")
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def odznaka(self, interaction: Interaction, user: nextcord.User, badge_name: str):
 
         with open(self.user_profiles_file, 'r') as file:
@@ -206,7 +211,7 @@ class profil(commands.Cog):
         await interaction.response.send_message(f"{success_emoji}Pomyślnie zaktualizowano profil.")
         
     @nextcord.slash_command(name="dodaj_odznake", description="Dodaj emoji jako odznakę")
-    @has_role(1170518127369519124)
+    @has_role(1038039796767019051)
     async def dodaj_odznake(self, interaction: Interaction, emoji: str, badge_name: str):
 
         if not emoji:

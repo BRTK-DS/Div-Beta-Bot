@@ -18,4 +18,7 @@ staff_odzn = nextcord.PartialEmoji(animated=False, name="staff_badge", id="11707
 ver_odzn = nextcord.PartialEmoji(animated=False, name="verified_badge", id="1170729368373428397")
 vip_odzn = nextcord.PartialEmoji(animated=False, name="vip_badge", id="1170729361306034278")
 
+edit_emoji = nextcord.PartialEmoji(animated=False, name="edit_msg", id="1170726804680613939")
+join_emoji = nextcord.PartialEmoji(animated=False, name="usr_join", id="1186244256067768330")
+leave_emoji = nextcord.PartialEmoji(animated=False, name="usr_leave", id="1186244258835992647")
 

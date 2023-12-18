@@ -7,7 +7,7 @@ from chybacbposralo import *
 intents = nextcord.Intents.all()
 intents.members = True
 
-client = commands.Bot(command_prefix='/', intents=nextcord.Intents.all())
+client = commands.Bot(command_prefix='/', intents=nextcord.Intents.all(), max_messages=3000)
 
 @client.event
 async def on_ready():
