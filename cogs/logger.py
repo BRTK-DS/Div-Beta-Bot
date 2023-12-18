@@ -20,6 +20,14 @@ class logger(commands.Cog):
         channel_raw = message.channel.id
         channel_del = self.client.get_channel(channel_raw)
         
+        guild_id = 1038037955836661840
+        
+        if message.author.bot or not message.guild:
+            return
+        
+        if message.guild.id != guild_id:
+            return   
+        
         embed_del = Embed(title=f"{failed_emoji} Usunięcie wiadomości", timestamp=message.created_at, color=0xff0000)
         embed_del.add_field(
             name=f"- Autor wiadomości: {user.display_name}",
@@ -43,6 +51,14 @@ class logger(commands.Cog):
         user = after.author
         channel_raw = after.channel.id
         channel_upd = self.client.get_channel(channel_raw)
+        
+        guild_id = 1038037955836661840
+        
+        if after.author.bot or not after.guild:
+            return
+        
+        if after.guild.id != guild_id:
+            return   
         
         old_msg = before.content
         new_msg = after.content

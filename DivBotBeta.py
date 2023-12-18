@@ -24,4 +24,9 @@ if __name__ == '__main__':
     for extension in initial_extensions:
         client.load_extension(extension)
 
+@client.event
+async def on_message(message):
+    if not message.guild:
+        return
+
 client.run(TKN)
