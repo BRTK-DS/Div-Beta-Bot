@@ -102,9 +102,9 @@ class profil(commands.Cog):
 
         if badges:
             for i, badge in enumerate(badges):
-                if i == 0:  # First badge slot
+                if i == 0:
                     badge_1 = str(badge)
-                elif i == 1:  # Second badge slot
+                elif i == 1:
                     badge_2 = str(badge)
                 elif i == 2:
                     badge_3 = str(badge)
