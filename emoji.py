@@ -22,3 +22,4 @@ edit_emoji = nextcord.PartialEmoji(animated=False, name="edit_msg", id="11707268
 join_emoji = nextcord.PartialEmoji(animated=False, name="usr_join", id="1186244256067768330")
 leave_emoji = nextcord.PartialEmoji(animated=False, name="usr_leave", id="1186244258835992647")
 
+excited_emoji = nextcord.PartialEmoji(animated=False, name="Div_Excited", id="1114896197610639370")

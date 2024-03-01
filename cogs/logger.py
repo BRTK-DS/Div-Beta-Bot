@@ -2,7 +2,7 @@ import nextcord
 from nextcord import Embed
 from nextcord.ext import commands
 from emoji import *
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone, timedelta
 
 intents = nextcord.Intents.default()
 intents.messages = True
@@ -103,6 +103,11 @@ class logger(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         
+        tz_poland = timezone(timedelta(hours=1))
+        leave_time = datetime.utcnow().replace(tzinfo=timezone.utc).astimezone(tz_poland)
+        time_format = "%d/%m/%Y %H:%M"
+        leave_now = leave_time.strftime(time_format)
+        
         embed_leave = Embed(title=f"{leave_emoji} Użytkownik wyszedł z serwera", color=0xff0000)
         embed_leave.add_field(
             name=f"- Nazwa użytkownika: {member.display_name}",
@@ -110,6 +115,7 @@ class logger(commands.Cog):
             inline=False
         )
         embed_leave.set_thumbnail(url='https://cdn.discordapp.com/attachments/1155238879041962047/1186250892727558255/019ba383ab09d50ff38b73de0952aad3.png?ex=6592913c&is=65801c3c&hm=5c04d4dab8e5f1c92e1295a9b9054d8965a02281bba087e603437dbf7fd25140&')
+        embed_leave.set_footer(text=leave_now)
         
         channel_id = 1186019315934314596
         channel = self.client.get_channel(channel_id)
