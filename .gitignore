@@ -1,5 +1,6 @@
 chybacbposralo.py
 */__pycache__/
+__pycache__
 cogs/automod.py
 banned_words.txt
 user_data.json
