@@ -1,6 +1,5 @@
 chybacbposralo.py
-__pycache__/bottkn.cpython-311.pyc
-__pycache__/chybacbposralo.cpython-311.pyc
+*/__pycache__/
 cogs/automod.py
 banned_words.txt
 user_data.json
