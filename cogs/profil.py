@@ -8,6 +8,7 @@ import json
 import os
 from nextcord.ext.application_checks import has_role, ApplicationMissingRole
 from cogs.levels import levels
+from cogs.rep import rep
 
 class profil(commands.Cog):
     user_profiles_file = 'user_profiles.json'
@@ -18,6 +19,7 @@ class profil(commands.Cog):
         self.initialize_profiles()
         self.initialize_badges()
         self.levels_cog = levels(client)
+        self.rep_cog = rep(client)
 
     def initialize_profiles(self):
         if not os.path.exists(profil.user_profiles_file):
@@ -42,14 +44,17 @@ class profil(commands.Cog):
 
         user_id = str(user.id)
         level_info = self.levels_cog.get_user_level_info(user.id)
+        rep_info = await self.rep_cog.load_rep_profiles()
 
         if user_id in user_profiles:
             profile_data = user_profiles[user_id]
             date_of_birth = profile_data.get("date_of_birth")
             badges = profile_data.get("badges", [])
+            rep_points = profile_data.get("rep_points", 0)
         else:
             date_of_birth = None
             badges = []
+            rep_points = 0
 
         embed = Embed(title=f"{profil_emoji}Profil użytkownika @{user.display_name}", color=0xa751ed)
 
@@ -96,7 +101,7 @@ class profil(commands.Cog):
         
         embed.add_field(name="POZIOM: ",
                 value=f"{poziom_emoji}Poziom: {level}\n" 
-                      f"{pzmrep}Rep Level: Work In Progress\n",
+                      f"{pzmrep}Rep Level: {rep_points}\n",
                 inline=False
                 ) 
 
