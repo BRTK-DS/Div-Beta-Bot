@@ -22,8 +22,8 @@ class logger(commands.Cog):
         
         guild_id = 1038037955836661840
         
-        if message.author.bot or not message.guild:
-            return
+        # if message.author.bot or not message.guild:
+        #     return
         
         if message.guild.id != guild_id:
             return   
@@ -54,8 +54,8 @@ class logger(commands.Cog):
         
         guild_id = 1038037955836661840
         
-        if after.author.bot or not after.guild:
-            return
+        # if after.author.bot or not after.guild:
+        #     return
         
         if after.guild.id != guild_id:
             return   

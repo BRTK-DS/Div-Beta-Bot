@@ -30,8 +30,8 @@ class automod(commands.Cog):
                     pass
                 await message.author.add_roles(muted_role)
                 await message.author.remove_roles(role_id)
+                await message.delete()
                 await message.channel.send(f"{failed_emoji} {message.author.mention} został wyciszony.")
-                
                 break
             
 def setup(client):
