@@ -9,7 +9,7 @@ class automod(commands.Cog):
         self.client = client
         
         with open('banned_words.txt', 'r') as file:
-            self.banned_words = [word.strip()[2:].lower() for word in file.readlines()]
+            self.banned_words = [word.strip().lower() for word in file.readlines()]
         
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -30,8 +30,8 @@ class automod(commands.Cog):
                     pass
                 await message.author.add_roles(muted_role)
                 await message.author.remove_roles(role_id)
+                await message.delete()
                 await message.channel.send(f"{failed_emoji} {message.author.mention} został wyciszony.")
-                
                 break
             
 def setup(client):
