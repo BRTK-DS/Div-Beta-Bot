@@ -9,7 +9,7 @@ class automod(commands.Cog):
         self.client = client
         
         with open('banned_words.txt', 'r') as file:
-            self.banned_words = [word.strip()[2:].lower() for word in file.readlines()]
+            self.banned_words = [word.strip().lower() for word in file.readlines()]
         
     @commands.Cog.listener()
     async def on_message(self, message):
